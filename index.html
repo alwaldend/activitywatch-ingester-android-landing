@@ -46,7 +46,7 @@ How it works Enabling accessibility for this app lets it read the focused addres
 	<meta itemprop="name" content="ActivityWatch ingester Android">
 	<meta itemprop="description" content="ActivityWatch ingester Android An Android collector that reads supported browser address-bar text through Android accessibility and sends it to an ActivityWatch server. The app holds full accessibility permission only to obtain the URL; it never uses that permission for anything else.
 How it works Enabling accessibility for this app lets it read the focused address bar. The accessibility service matches browser view IDs (url_bar and common Chrome-derived variants), extracts the current URL, and sends an ActivityWatch heartbeat for the web.tab.current bucket to a configurable server. web.tab.current heartbeats use pulsetime=1.0; consecutive URLs are sent with the time spent on the previous tab as the duration field. Data goes directly from this app to the ActivityWatch HTTP API; it is not uploaded to any other service. Configuration Open the app to configure:">
-	<meta itemprop="wordCount" content="322">
+	<meta itemprop="wordCount" content="353">
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:title" content="ActivityWatch ingester Android">
 	<meta name="twitter:description" content="ActivityWatch ingester Android An Android collector that reads supported browser address-bar text through Android accessibility and sends it to an ActivityWatch server. The app holds full accessibility permission only to obtain the URL; it never uses that permission for anything else.
@@ -190,6 +190,16 @@ address bar changes.</li>
 <li>Tested against the ActivityWatch v0.13 HTTP API (<code>POST /api/0/buckets</code> and
 <code>POST /api/0/buckets/web.tab.current/heartbeat</code>).</li>
 </ul>
+<h2 id="landing-page">Landing page</h2>
+<p>The landing page is published at
+<a
+  href="https://activitywatch-ingester-android.alwaldend.com/"
+  
+  >activitywatch-ingester-android.alwaldend.com</a
+>
+,
+built from this README by the shared Hugo landing template. The DNS record
+lives in <code>dnsconfig.json</code> and is applied through <code>//infra/dns</code>.</p>
 
     </div>
   </div>
