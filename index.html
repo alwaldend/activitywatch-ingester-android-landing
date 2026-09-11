@@ -33,24 +33,20 @@
 <meta name="robots" content="index, follow">
 
 <title>ActivityWatch Ingester Android</title>
-<meta name="description" content="ActivityWatch ingester Android An Android collector that reads supported browser address-bar text through Android accessibility and sends it to an ActivityWatch server. The app holds full accessibility permission only to obtain the URL; it never uses that permission for anything else.
-How it works Enabling accessibility for this app lets it read the focused address bar. The accessibility service matches browser view IDs (url_bar and common Chrome-derived variants), extracts the current URL, and sends an ActivityWatch heartbeat for the web.tab.current bucket to a configurable server. web.tab.current heartbeats use pulsetime=1.0; consecutive URLs are sent with the time spent on the previous tab as the duration field. Data goes directly from this app to the ActivityWatch HTTP API; it is not uploaded to any other service. Configuration Open the app to configure:">
+<meta name="description" content="Accessibility-based Android collector that sends browser URLs to ActivityWatch">
 <meta property="og:url" content="/">
 	<meta property="og:site_name" content="ActivityWatch Ingester Android">
 	<meta property="og:title" content="ActivityWatch ingester Android">
-	<meta property="og:description" content="ActivityWatch ingester Android An Android collector that reads supported browser address-bar text through Android accessibility and sends it to an ActivityWatch server. The app holds full accessibility permission only to obtain the URL; it never uses that permission for anything else.
-How it works Enabling accessibility for this app lets it read the focused address bar. The accessibility service matches browser view IDs (url_bar and common Chrome-derived variants), extracts the current URL, and sends an ActivityWatch heartbeat for the web.tab.current bucket to a configurable server. web.tab.current heartbeats use pulsetime=1.0; consecutive URLs are sent with the time spent on the previous tab as the duration field. Data goes directly from this app to the ActivityWatch HTTP API; it is not uploaded to any other service. Configuration Open the app to configure:">
+	<meta property="og:description" content="Accessibility-based Android collector that sends browser URLs to ActivityWatch">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="website">
 
 	<meta itemprop="name" content="ActivityWatch ingester Android">
-	<meta itemprop="description" content="ActivityWatch ingester Android An Android collector that reads supported browser address-bar text through Android accessibility and sends it to an ActivityWatch server. The app holds full accessibility permission only to obtain the URL; it never uses that permission for anything else.
-How it works Enabling accessibility for this app lets it read the focused address bar. The accessibility service matches browser view IDs (url_bar and common Chrome-derived variants), extracts the current URL, and sends an ActivityWatch heartbeat for the web.tab.current bucket to a configurable server. web.tab.current heartbeats use pulsetime=1.0; consecutive URLs are sent with the time spent on the previous tab as the duration field. Data goes directly from this app to the ActivityWatch HTTP API; it is not uploaded to any other service. Configuration Open the app to configure:">
-	<meta itemprop="wordCount" content="353">
+	<meta itemprop="description" content="Accessibility-based Android collector that sends browser URLs to ActivityWatch">
+	<meta itemprop="wordCount" content="394">
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:title" content="ActivityWatch ingester Android">
-	<meta name="twitter:description" content="ActivityWatch ingester Android An Android collector that reads supported browser address-bar text through Android accessibility and sends it to an ActivityWatch server. The app holds full accessibility permission only to obtain the URL; it never uses that permission for anything else.
-How it works Enabling accessibility for this app lets it read the focused address bar. The accessibility service matches browser view IDs (url_bar and common Chrome-derived variants), extracts the current URL, and sends an ActivityWatch heartbeat for the web.tab.current bucket to a configurable server. web.tab.current heartbeats use pulsetime=1.0; consecutive URLs are sent with the time spent on the previous tab as the duration field. Data goes directly from this app to the ActivityWatch HTTP API; it is not uploaded to any other service. Configuration Open the app to configure:">
+	<meta name="twitter:description" content="Accessibility-based Android collector that sends browser URLs to ActivityWatch">
 <link rel="preload" href="/scss/main.min.8f0680d136cc9695b0ad0e99d08675b9835bbc1b0b99eda42af2f5baac89c013.css" as="style" integrity="sha256-jwaA0TbMlpWwrQ6Z0IZ1uYNbvBsLme2kKvL1uqyJwBM=" crossorigin="anonymous">
 <link href="/scss/main.min.8f0680d136cc9695b0ad0e99d08675b9835bbc1b0b99eda42af2f5baac89c013.css" rel="stylesheet" integrity="sha256-jwaA0TbMlpWwrQ6Z0IZ1uYNbvBsLme2kKvL1uqyJwBM=" crossorigin="anonymous">
 <script
@@ -140,6 +136,8 @@ How it works Enabling accessibility for this app lets it read the focused addres
 <section class="row">
   <div class="col">
     <div class="container td-content landing-content">
+      
+      <p class="lead">Accessibility-based Android collector that sends browser URLs to ActivityWatch</p>
        <h1 id="activitywatch-ingester-android">ActivityWatch ingester Android</h1>
 <p>An Android collector that reads supported browser address-bar text through
 Android accessibility and sends it to an ActivityWatch server. The app holds
@@ -176,8 +174,12 @@ Internet, Opera, and Edge do not use that view ID yet.</p>
 <h2 id="build-and-install">Build and install</h2>
 <ol>
 <li>Build the APK:
-<code>bazel build //projects/activitywatch_ingester_android/cmd/app:ingester_binary</code></li>
-<li>Install the resulting APK on the device.</li>
+<code>bazel build //projects/activitywatch_ingester_android/main/java:ingester_binary</code></li>
+<li>Verify the APK starts on an already running device or emulator:
+<code>bazel run //projects/activitywatch_ingester_android/test:ingester_smoke_test</code>
+This manual smoke test installs the Bazel-built APK, launches the activity,
+waits for the process, and confirms it stays alive. It is not a CI test.</li>
+<li>Install the APK on the device from <code>bazel-bin/projects/activitywatch_ingester_android/main/java/ingester_binary.apk</code>.</li>
 <li>Start the app and set the ActivityWatch server URL.</li>
 <li>Enable accessibility for the app in Android settings; Android shows the
 full-access warning, which is the mechanism this collector is built on.</li>
